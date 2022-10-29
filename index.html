@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="javascript/js1.js" defer></script>
+    <script src="javascript/js2.js" defer></script>
+    <link rel="shortcut icon" href="imagens/julio-cesar-l.jpg" type="image/x-icon">
+    <title>Cifra de César & Base64</title>
+</head>
+<body>
+
+    <p id="paragrafo-first">Base 64 and Cifra de César</p>
+    <div id="index">
+        <button id="popup1">Base 64</button>
+        <button id="popup2">Cifra de César</button>
+    </div>
+
+
+    <div id="all">
+        <div id="lado-esquerdo">
+            <img src="imagens/base64.jpg" alt="">
+            <div class="card">
+                
+                <p>A codificação Base64 é frequentemente utilizada quando existe uma necessidade de transferência e armazenamento de dados binários para um dispositivo designado para trabalhar com dados textuais. Esta codificação é amplamente utilizada por aplicações em conjunto com a linguagem de marcação XML, possibilitando o armazenamento de dados binários em forma de texto. É constituído por 64 caracteres ([A-Z],[a-z],[0-9], "/" e "+") que deram origem ao seu nome
+               
+                
+                <br> <br>
+            </div>
+
+        </div>
+
+            <div id="lado-esquerdo2">
+                
+                <img src="imagens/julio-cesar-l.jpg" alt="">
+                <div class="card">
+                    <p>Em criptografia, a Cifra de César, também conhecida como cifra de troca, código de César ou troca de César, é uma das mais simples e conhecidas técnicas de criptografia. É um tipo de cifra de substituição na qual cada letra do texto é substituída por outra, que se apresenta no alfabeto abaixo dela um número fixo de vezes.  O nome do método é em homenagem a Júlio César, que o usou para se comunicar com os seus generais.</p>
+                   
+                
+                    
+                    <br> <br>
+                </div>
+            </div>
+
+
+
+            <div class="popup"><!--Popup para o botão Entrar-->
+                <div class="close-btn">&times;</div>
+                <div id="inputs">
+                    
+                        <input name="radio" type="radio" value="codificar" id="codificar"  >
+                        <label for="radio">Codificar</label>
+                    
+                    
+                    
+                    
+                        <input name="radio" type="radio" value="decodificar"  id="decodificar">
+                        <label for="radio" >Decodificar</label>
+                                     
+                </div>
+
+                <div id="textarea1">
+                    <textarea placeholder="Digite seu texto..." id="txt-entrada"></textarea>
+                </div>
+                <p id="pbase">Base 64</p>
+
+                <div id="pbala">
+                    
+
+                    <button id="button-codificar" onclick="codificando()">Codificar</button>
+                    
+                </div>
+
+                <textarea placeholder="Resultado..." id="txt-saida" readonly></textarea>
+            </div><!--fim popup-->
+
+
+
+
+
+
+
+            <!-- popup 2 -->
+
+
+            
+            <div class="popup2"><!--Popup para o botão Entrar-->
+                <div class="close-btn2">&times;</div>
+                <div id="inputs2">
+                    
+                        <input name="radio" type="radio" value="codificar2" id="codificar2" checked >
+                        <label for="radio">Codificar</label>
+                    
+                    
+                    
+                    
+                        <input name="radio" type="radio" value="decodificar2"  id="decodificar2">
+                        <label for="radio" >Decodificar</label>
+                                     
+                </div>
+
+                <div id="textarea2">
+                    <textarea placeholder="Digite seu texto..." id="txt-entrada2"></textarea>
+                </div>
+                <p id="pbase2">Cifra de César</p>
+                <input type="number" id="shiftinput2" min="0" max="26">
+
+                <div id="pbala2">
+                    
+
+                    <button id="button-codificar2" onclick="codificando2()">Codificar</button>
+                    
+                </div>
+
+                <textarea placeholder="Resultado..." id="txt-saida2" readonly></textarea>
+            </div><!--fim popup-->
+
+        
+
+
+        
+
+        
+
+
+     </div> <!-- all -->
+
+
+
+     <script>
+        var txtsaida5 = document.querySelector('#txt-saida2')
+        let txtentrada10 = document.querySelector('#txt-entrada2')
+        let inputs = [txtsaida5,txtentrada10];
+        let copybtn = document.getElementById('copytoclipboard')
+
+        inputs.forEach( input =>{
+            input.oninput = () =>{
+                input.value = input.value;
+            }
+        })
+
+        function codificando2(){
+
+            let txtentrada10 = document.getElementById('txt-entrada2').value;
+            let campo = ""
+            let shiftinput2 = parseInt(document.getElementById('shiftinput2').value)
+
+                if(codificar2.checked){
+            for(var i = 0; i < txtentrada10.length; i++){
+                let formula = txtentrada10[i].charCodeAt()
+                let soma = formula + shiftinput2
+                soma >=65 && soma <=122 ? campo += String.fromCharCode(soma) : soma > 122 ? campo += String.fromCharCode(65 +(soma & 122)) : campo += inputtxt[i]
+                    
+                }
+                txtsaida5.value = campo
+                
+
+                }else if(decodificar2.checked){
+            
+                    for(var i = 0; i < txtentrada10.length; i++){
+                let formula = txtentrada10[i].charCodeAt()                     
+                let soma = formula - shiftinput2
+                soma >=65 && soma <=122 ? campo += String.fromCharCode(soma) : soma > 122 ? campo += String.fromCharCode(65 +(soma & 122)) : campo += inputtxt[i]
+
+            }       
+
+
+
+            txtsaida5.value = campo
+
+            }}
+
+     </script>
+
+
+      
+        <!--
+        function copytextp(){
+
+            txt-saida2.select()
+            txt-saida2.setSelectionRange(0,99999)
+            document.execCommand('copy')
+            alert(`texto copiado: ${txt-saida2.value}`)
+        }
+
+        copybtn.addEventListener('click', copytextp)
+
+     -->
+
+    <script src="javascript/js1.js" ></script>
+    <script src="javascript/js2.js" ></script>
+    
+    
+</body>
+</html>
